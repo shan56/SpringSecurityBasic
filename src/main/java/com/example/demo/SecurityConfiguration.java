@@ -14,22 +14,24 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
-                .antMatchers("/h2-console/**")
-                .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
-                .formLogin()
-                .permitAll();
+                .formLogin();
+
+        //adding following code will able to see h2 DB via localhost:8080/h2-console
         httpSecurity.csrf()
                 .ignoringAntMatchers("/h2-console/**");
         httpSecurity.headers()
                 .frameOptions()
                 .sameOrigin();
+
     }
+
 
     @Autowired
     private DataSource dataSource;
