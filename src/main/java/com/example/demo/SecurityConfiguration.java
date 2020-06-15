@@ -23,7 +23,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin();
 
-        //adding following code will able to see h2 DB via localhost:8080/h2-console
+        //* FOR ACCESS TO H2 FOR DEBUGGING
         httpSecurity.csrf()
                 .ignoringAntMatchers("/h2-console/**");
         httpSecurity.headers()
@@ -31,6 +31,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .sameOrigin();
 
     }
+
 
 
     @Autowired
